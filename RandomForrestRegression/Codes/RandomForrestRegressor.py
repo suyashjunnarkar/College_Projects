@@ -22,7 +22,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y,
                                                     random_state=123, 
                                                     stratify=y)
  
-# Evaluate model pipeline on test data
+# Evaluate model on test data
 model = RandomForestRegressor(n_estimators = 1000, oob_score = True, n_jobs = 1,random_state =50,max_features = "auto", min_samples_leaf = 2,max_depth=4)
 finalTree = model.fit(X_train, y_train)
 print (finalTree)
