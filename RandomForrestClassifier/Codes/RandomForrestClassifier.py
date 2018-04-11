@@ -18,11 +18,11 @@ y = data.output
 X = data.drop('output', axis=1)
 
 #Model training
-model = RandomForestClassifier(n_estimators = 1000, oob_score = True, n_jobs = -1,random_state =50,max_features = "auto", min_samples_leaf = 2)
-finalTree = model.fit(X,y)
+model = RandomForestClassifier(n_estimators = 1000, oob_score = True, n_jobs = 1,random_state=50, max_features = "auto", min_samples_leaf=2, max_depth=6)
+finalTree = model.fit(X, y)
 
 #taking test data
-testData = pd.read_csv('../data/test.csv',index_col=0)
+testData = pd.read_csv('../data/test.csv', index_col=0)
 y_test = data.output
 X_test = data.drop('output', axis=1)
 
@@ -36,7 +36,7 @@ print ("Accuracy = ",accuracy_score(y_test, pred))
 print("1000 trees are iterating!!! ")
  
 for tree_in_forest in finalTree.estimators_:
-	export_graphviz(tree_in_forest,feature_names=X.columns,filled=True,rounded=True)
+	export_graphviz(tree_in_forest,feature_names=X.columns,filled=True, rounded=True)
    
 print ("Generating png file ...")
 os.system('dot -Tpng tree.dot -o tree.png')
